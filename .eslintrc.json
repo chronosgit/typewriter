@@ -4,11 +4,25 @@
     "es2021": true,
     "node": true
   },
-  "extends": "next/core-web-vitals, eslint:recommended",
+  "extends": "next/core-web-vitals, eslint:recommended, plugin:prettier/recommended",
   "globals": {
     "React": "readonly"
   },
   "rules": {
+    "prettier/prettier": [
+      "warn",
+      {
+        "trailingComma": "es5",
+        "tabWidth": 2,
+        "semi": true,
+        "singleQuote": false,
+        "bracketSpacing": true,
+        "arrowParens": "avoid",
+        "printWidth": 100,
+        "endOfLine": "lf",
+        "proseWrap": "preserve"
+      }
+    ],
     "no-unused-vars": "warn",
     "no-const-assign": "error",
     "no-empty": "warn",
