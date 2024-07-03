@@ -3,10 +3,16 @@
 @tailwind utilities;
 
 :root {
+  --clr-bg: #916ee4;
+  --clr-primary: #000000;
+  --filter-invert: 0;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
+    --clr-bg: #212121;
+    --clr-primary: #ddd;
+    --filter-invert: 1;
   }
 }
 
@@ -14,10 +20,13 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  color: var(--clr-primary);
+  transition: color 0.2s ease;
 }
 
 body {
   overflow-y: hidden;
+  background-color: var(--clr-bg);
 }
 
 button {
@@ -32,6 +41,11 @@ img {
 
 a {
   text-decoration: none;
+}
+
+.color-change {
+  filter: var(--filter-invert);
+  transition: all 0.2s ease;
 }
 
 /* no idea what this does */
