@@ -2,8 +2,10 @@
 
 import { useContext } from 'react';
 import Wave1 from '@/components/waves/wave-1/Wave1';
+import Resource from '@/app/_components/resource/Resource';
 import ThemeContext from '@/contexts/theme/ThemeContext';
 import exist from '@/utils/exist';
+import resourcesMock from '@/app/_utils/resourcesMock';
 
 const Resources = () => {
 	const themeCtx = useContext(ThemeContext);
@@ -21,10 +23,14 @@ const Resources = () => {
 					Universe of great insights
 				</h2>
 
-				<p className="text-lg text-primary-alt">
+				<p className="mb-20 text-lg text-primary-alt">
 					Typing skills? Check. Take the next step and make your online
 					communication outstanding.
 				</p>
+
+				{resourcesMock.map(r => (
+					<Resource key={r.id} resource={r} />
+				))}
 			</div>
 		</section>
 	);
