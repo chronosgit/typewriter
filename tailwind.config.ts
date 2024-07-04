@@ -10,7 +10,9 @@ const config: Config = {
 		extend: {
 			colors: {
 				bg: 'var(--clr-bg)',
+				'bg-alt': 'var(--clr-bg-alt)',
 				primary: 'var(--clr-primary)',
+				'primary-alt': 'var(--clr-primary-alt)',
 			},
 		},
 	},
