@@ -2,15 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-body:not(.dark-thteme) {
+body:not(.dark-theme) {
 	--clr-bg: #efefef;
-	--clr-primary: #000000;
+	--clr-bg-alt: #292c34;
+	--clr-primary: #000;
+	--clr-primary-alt: #ddd;
 	--filter-invert: 0;
 }
 
 body.dark-theme {
 	--clr-bg: #292c34;
+	--clr-bg-alt: #efefef;
 	--clr-primary: #ddd;
+	--clr-primary-alt: #000;
 	--filter-invert: 1;
 }
 
@@ -48,11 +52,30 @@ a {
 
 @layer utilities {
 	/* Utilities */
-	.color-change {
-		filter: var(--filter-invert);
+	.underline-animation-center {
+		position: relative;
 	}
 
-	/* Transitions */
+	.underline-animation-center::after {
+		position: absolute;
+		content: '';
+		left: 50%;
+		right: 50%;
+		bottom: 0;
+		transform: translateY(3px);
+		width: 0;
+		height: 3px;
+		background-color: gray;
+		transition: all 0.2s ease;
+	}
+
+	.underline-animation-center:hover::after {
+		width: 100%;
+		left: 0;
+		right: 0;
+	}
+
+	/* Transitions (need to remove and use Tailwind only) */
 	.transition-all-200-ease {
 		transition: all 0.2s ease;
 	}

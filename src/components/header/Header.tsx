@@ -14,19 +14,21 @@ const Header = () => {
 	};
 
 	return (
-		<div className="flex justify-between items-center mb-4 px-4 py-2 text-primary">
-			<Clickable onClick={() => router.push('/')}>
-				<Logo />
-			</Clickable>
-
-			<div className="flex gap-4 items-center">
-				<ThemeSwitch />
-
-				<Clickable onClick={toMyGithub}>
-					<Github />
+		<header className="mb-4 py-2 text-primary">
+			<div className="max-w-screen-xl mx-auto flex justify-between items-center">
+				<Clickable onClick={() => router.push('/')}>
+					<Logo />
 				</Clickable>
+
+				<div className="flex gap-4 items-center">
+					<ThemeSwitch />
+
+					<Clickable onClick={toMyGithub}>
+						<Github />
+					</Clickable>
+				</div>
 			</div>
-		</div>
+		</header>
 	);
 };
 
