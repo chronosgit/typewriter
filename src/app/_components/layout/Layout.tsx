@@ -13,13 +13,17 @@ const Layout: FC<Props> = ({ children }) => {
 	const pathname = usePathname();
 	const hasLayout = pathname === '/';
 
+	if (!hasLayout) {
+		return <>{children}</>;
+	}
+
 	return (
 		<>
-			{hasLayout && <Header />}
+			<Header />
 
 			{children}
 
-			{hasLayout && <Footer />}
+			<Footer />
 		</>
 	);
 };
