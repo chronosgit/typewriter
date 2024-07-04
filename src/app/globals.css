@@ -2,15 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-body:not(.dark-thteme) {
+body:not(.dark-theme) {
 	--clr-bg: #efefef;
-	--clr-primary: #000000;
+	--clr-bg-alt: #292c34;
+	--clr-primary: #000;
+	--clr-primary-alt: #ddd;
 	--filter-invert: 0;
 }
 
 body.dark-theme {
 	--clr-bg: #292c34;
+	--clr-bg-alt: #efefef;
 	--clr-primary: #ddd;
+	--clr-primary-alt: #000;
 	--filter-invert: 1;
 }
 
