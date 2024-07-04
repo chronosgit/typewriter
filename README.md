@@ -28,6 +28,9 @@ result.
     	components
     	hooks
     	utils
+        types
+        enums
+        contexts
 
 1. `public` - for static files.
 2. `src` - application related files.
@@ -39,6 +42,9 @@ result.
 5. `components` - global (common) folder with reusable components.
 6. `hooks` - global (common) folder with reusable hooks.
 7. `utils` - global (common) folder with reusable utilities.
+8. `contexts` - global (common) folder with reusable contexts.
+9. `enums` - global (common) folder with reusable enums.
+10. `types` - global (common) folder with reusable types & interfaces.
 
 ## Brought with Next.js
 
