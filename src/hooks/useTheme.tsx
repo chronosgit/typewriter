@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import Themes from '@/enums/Themes';
 
-type IThemeHook = () => {
+type ThemeHook = () => {
 	theme: Themes;
 	isDark: Boolean;
 	toggleTheme: () => void;
 };
 
-const useTheme: IThemeHook = () => {
+const useTheme: ThemeHook = () => {
 	const [theme, setTheme] = useState<Themes>(Themes.Light);
 	const [isDark, setDark] = useState<Boolean>(false);
 
