@@ -2,55 +2,71 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --clr-bg: #916ee4;
-  --clr-primary: #000000;
-  --filter-invert: 0;
+body:not(.dark-thteme) {
+	--clr-bg: #efefef;
+	--clr-primary: #000000;
+	--filter-invert: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --clr-bg: #212121;
-    --clr-primary: #ddd;
-    --filter-invert: 1;
-  }
+body.dark-theme {
+	--clr-bg: #292c34;
+	--clr-primary: #ddd;
+	--filter-invert: 1;
+}
+
+/* Smooth theme switch */
+*,
+body {
+	transition: all 0.1s ease;
 }
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  color: var(--clr-primary);
-  transition: color 0.2s ease;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	color: var(--clr-primary);
 }
 
 body {
-  overflow-y: hidden;
-  background-color: var(--clr-bg);
+	overflow-y: hidden;
+	background-color: var(--clr-bg);
 }
 
 button {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 img {
-  max-width: 100%;
-  height: auto;
-  object-fit: contain;
+	max-width: 100%;
+	height: auto;
+	object-fit: contain;
 }
 
 a {
-  text-decoration: none;
+	text-decoration: none;
 }
 
-.color-change {
-  filter: var(--filter-invert);
-  transition: all 0.2s ease;
-}
-
-/* no idea what this does */
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+	/* Utilities */
+	.color-change {
+		filter: var(--filter-invert);
+	}
+
+	/* Transitions */
+	.transition-all-200-ease {
+		transition: all 0.2s ease;
+	}
+
+	/* Imports */
+	.bg-sky-dark {
+		--darken: rgba(0, 0, 0, 0.3);
+		background-image: linear-gradient(var(--darken), var(--darken)),
+			url('../assets/sky-dark.jpeg');
+	}
+
+	.bg-sky-light {
+		--darken: rgba(0, 0, 0, 0.1);
+		background-image: linear-gradient(var(--darken), var(--darken)),
+			url('../assets/sky-light.jpeg');
+	}
 }
