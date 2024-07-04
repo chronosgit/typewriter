@@ -4,8 +4,9 @@
   "semi": true,
   "singleQuote": true,
   "bracketSpacing": true,
+  "proseWrap": "always",
+  "useTabs": true,
   "arrowParens": "avoid",
   "printWidth": 80,
-  "endOfLine": "lf",
-  "proseWrap": "preserve"
+  "endOfLine": "lf"
 }
