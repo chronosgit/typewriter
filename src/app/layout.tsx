@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import Header from '@/components/header/Header';
-import './globals.css';
+import CustomLayout from './_components/layout/Layout';
 import { ThemeContextProvider } from '@/contexts/theme/ThemeContext';
+import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -32,9 +32,9 @@ const RootLayout = ({
 		<html lang="en">
 			<body className={inter.className}>
 				<ThemeContextProvider>
-					<Header />
-
-					{children}
+					<CustomLayout>
+						{children}
+					</CustomLayout>
 				</ThemeContextProvider>
 			</body>
 		</html>
