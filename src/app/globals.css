@@ -58,7 +58,7 @@ a {
 
 	.underline-animation-center::after {
 		position: absolute;
-		content: "";
+		content: '';
 		left: 50%;
 		right: 50%;
 		bottom: 0;
