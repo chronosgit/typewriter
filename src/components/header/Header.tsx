@@ -14,7 +14,7 @@ const Header = () => {
 	};
 
 	return (
-		<div className="mb-4 py-2 text-primary">
+		<header className="mb-4 py-2 text-primary">
 			<div className="max-w-screen-lg mx-auto flex justify-between items-center">
 				<Clickable onClick={() => router.push('/')}>
 					<Logo />
@@ -28,7 +28,7 @@ const Header = () => {
 					</Clickable>
 				</div>
 			</div>
-		</div>
+		</header>
 	);
 };
 
