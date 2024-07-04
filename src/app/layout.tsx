@@ -32,9 +32,7 @@ const RootLayout = ({
 		<html lang="en">
 			<body className={inter.className}>
 				<ThemeContextProvider>
-					<CustomLayout>
-						{children}
-					</CustomLayout>
+					<CustomLayout>{children}</CustomLayout>
 				</ThemeContextProvider>
 			</body>
 		</html>
