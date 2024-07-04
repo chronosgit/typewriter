@@ -18,19 +18,13 @@ const Resource: FC<Props> = ({ resource }) => {
 
 			<p className="my-5">{resource.descr}</p>
 
-			<div className="underline-animation-center-green-700 max-w-max flex items-center">
-				<Link href={resource.linkUrl} className="font-medium text-green-700">
+			<div className="underline-animation-center max-w-max flex items-center">
+				<Link href={resource.linkUrl} className="font-medium">
 					{resource.linkLabel}
 				</Link>
 
 				<div className="scale-150 cursor-pointer">
-					<RxCaretRight
-						filter={`
-							invert(18%) sepia(76%) saturate(6917%) hue-rotate(152deg) 
-							brightness(97%) contrast(84%)
-						`}
-						className="transition ease-linear duration-200"
-					/>
+					<RxCaretRight className="transition ease-linear duration-200" />
 				</div>
 			</div>
 		</div>

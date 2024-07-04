@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-	--tailwind-text-green-700: #15803d;
-}
-
 body:not(.dark-theme) {
 	--clr-bg: #efefef;
 	--clr-bg-alt: #292c34;
@@ -56,11 +52,11 @@ a {
 
 @layer utilities {
 	/* Utilities */
-	.underline-animation-center-green-700 {
+	.underline-animation-center {
 		position: relative;
 	}
 
-	.underline-animation-center-green-700::after {
+	.underline-animation-center::after {
 		position: absolute;
 		content: "";
 		left: 50%;
@@ -68,12 +64,12 @@ a {
 		bottom: 0;
 		transform: translateY(3px);
 		width: 0;
-		height: 2px;
-		background-color: var(--tailwind-text-green-700);
+		height: 3px;
+		background-color: gray;
 		transition: all 0.2s ease;
 	}
 
-	.underline-animation-center-green-700:hover::after {
+	.underline-animation-center:hover::after {
 		width: 100%;
 		left: 0;
 		right: 0;
