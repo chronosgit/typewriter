@@ -3,11 +3,11 @@ import { Url } from 'next/dist/shared/lib/router/router';
 
 interface Resource {
 	id: Key | null | undefined;
-	name: String;
-	descr: String;
+	name: string;
+	descr: string;
 	linkUrl: Url;
-	linkLabel: String;
-	icon: ReactElement | String;
+	linkLabel: string;
+	icon: ReactElement | string;
 }
 
 export default Resource;

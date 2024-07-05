@@ -3,7 +3,7 @@ import { Url } from 'next/dist/shared/lib/router/router';
 
 interface TechStack {
 	id: Key | null | undefined;
-	name: String;
+	name: string;
 	link: Url;
 	icon: ReactElement;
 }
