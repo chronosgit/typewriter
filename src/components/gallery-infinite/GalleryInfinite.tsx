@@ -13,7 +13,7 @@ const GalleryInfinite: FC<Props> = ({
 	tailwindChildRules = '',
 }) => {
 	return (
-		<div className={`flex items-center ${tailwindWrapperRules}`}>
+		<div className={tailwindWrapperRules}>
 			{items.map((i, id) => {
 				return (
 					<div key={i.id || id} className={tailwindChildRules}>
