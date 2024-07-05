@@ -5,7 +5,7 @@ import Wave1 from '@/components/waves/wave-1/Wave1';
 import Resource from '@/app/_components/resource/Resource';
 import ThemeContext from '@/contexts/theme/ThemeContext';
 import exist from '@/utils/exist';
-import mockResources from '@/app/_utils/mockResources';
+import resources from '@/app/_utils/resources';
 
 const Resources = () => {
 	const themeCtx = useContext(ThemeContext);
@@ -28,7 +28,7 @@ const Resources = () => {
 				</p>
 
 				<div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
-					{mockResources.map(r => (
+					{resources.map(r => (
 						<Resource key={r.id} resource={r} />
 					))}
 				</div>
