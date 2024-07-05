@@ -21,7 +21,7 @@ const Resource: FC<Props> = ({ resource }) => {
 			</div>
 
 			<div className="animation_underline_center max-w-max flex items-center">
-				<Link href={resource.linkUrl} className="font-medium">
+				<Link href={resource.linkUrl} target="_blank" className="font-medium">
 					{resource.linkLabel}
 				</Link>
 
