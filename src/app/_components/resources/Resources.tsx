@@ -15,7 +15,7 @@ const Resources = () => {
 	}
 
 	return (
-		<section className="relative py-12 bg-bg-alt">
+		<section className="relative py-12 px-2 bg-bg-alt">
 			<Wave1 />
 
 			<div className="max-w-screen-xl mx-auto text-center">
@@ -28,9 +28,11 @@ const Resources = () => {
 					communication outstanding.
 				</p>
 
-				{resourcesMock.map(r => (
-					<Resource key={r.id} resource={r} />
-				))}
+				<div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
+					{resourcesMock.map(r => (
+						<Resource key={r.id} resource={r} />
+					))}
+				</div>
 			</div>
 		</section>
 	);
