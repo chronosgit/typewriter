@@ -4,14 +4,14 @@
 
 body:not(.dark-theme) {
 	--clr-bg: #efefef;
-	--clr-bg-alt: #292c34;
+	--clr-bg-alt: #19151b;
 	--clr-primary: #000;
 	--clr-primary-alt: #ddd;
 	--filter-invert: 0;
 }
 
 body.dark-theme {
-	--clr-bg: #292c34;
+	--clr-bg: #19151b;
 	--clr-bg-alt: #efefef;
 	--clr-primary: #ddd;
 	--clr-primary-alt: #000;
