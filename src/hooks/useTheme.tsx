@@ -4,12 +4,14 @@ import Themes from '@/enums/Themes';
 type ThemeHook = () => {
 	theme: Themes;
 	isDark: Boolean;
+	isPreferReady: Boolean;
 	toggleTheme: () => void;
 };
 
 const useTheme: ThemeHook = () => {
 	const [theme, setTheme] = useState<Themes>(Themes.Light);
 	const [isDark, setDark] = useState<Boolean>(false);
+	const [isPreferReady, setPreferReady] = useState<Boolean>(false);
 
 	const toDark = () => {
 		document.body.classList.add('dark-theme');
@@ -34,6 +36,7 @@ const useTheme: ThemeHook = () => {
 
 		// Initial change
 		darkModeMediaQuery.matches ? toDark() : toLight();
+		setPreferReady(true);
 
 		darkModeMediaQuery.addEventListener('change', onPreferScheme);
 
@@ -53,7 +56,7 @@ const useTheme: ThemeHook = () => {
 		}
 	};
 
-	return { theme, isDark, toggleTheme };
+	return { theme, isDark, isPreferReady, toggleTheme };
 };
 
 export default useTheme;

@@ -7,6 +7,7 @@ import useTheme from '@/hooks/useTheme';
 interface ThemeContext {
 	theme: Themes;
 	isDark: Boolean;
+	isPreferReady: Boolean,
 	toggleTheme: () => void;
 }
 
@@ -17,10 +18,10 @@ interface Props {
 const ThemeContext = createContext<ThemeContext | null>(null);
 
 const ThemeContextProvider: FC<Props> = ({ children }) => {
-	const { theme, isDark, toggleTheme } = useTheme();
+	const { theme, isDark, isPreferReady, toggleTheme } = useTheme();
 
 	return (
-		<ThemeContext.Provider value={{ theme, isDark, toggleTheme }}>
+		<ThemeContext.Provider value={{ theme, isDark, isPreferReady, toggleTheme }}>
 			{children}
 		</ThemeContext.Provider>
 	);
