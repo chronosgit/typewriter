@@ -15,7 +15,7 @@ const resourcesMock: Resource[] = [
 	{
 		id: '2',
 		name: 'Linkedin',
-		descr: 'Let\' connect on Linkedin!',
+		descr: "Let' connect on Linkedin!",
 		linkUrl: 'https://kz.linkedin.com/in/nurken-kidirmaganbetov-338b412aa',
 		linkLabel: 'Connect',
 		icon: <LiaLinkedin />,

@@ -24,7 +24,8 @@ const Resources = () => {
 				</h2>
 
 				<p className="mb-20 text-lg text-primary-alt">
-					Typing skills? Check. Take the next step and look forward to new horizons.
+					Typing skills? Check. Take the next step and look forward to new
+					horizons.
 				</p>
 
 				<div className="grid grid-cols-1 gap-8 sm:grid-cols-3">

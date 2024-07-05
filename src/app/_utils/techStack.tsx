@@ -1,7 +1,7 @@
-import TechStack from "@/types/TechStack";
-import { BiLogoTypescript } from "react-icons/bi";
-import { FaCss3, FaHtml5, FaReact } from "react-icons/fa6";
-import { RiNextjsLine, RiTailwindCssFill } from "react-icons/ri";
+import TechStack from '@/types/TechStack';
+import { BiLogoTypescript } from 'react-icons/bi';
+import { FaCss3, FaHtml5, FaReact } from 'react-icons/fa6';
+import { RiNextjsLine, RiTailwindCssFill } from 'react-icons/ri';
 
 const techStack: TechStack[] = [
 	{
