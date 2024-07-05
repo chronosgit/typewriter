@@ -9,8 +9,8 @@ const TechStack = () => {
 				is <em>universal</em> service
 			</h2>
 
-			<GalleryInfinite 
-				items={techStack} 
+			<GalleryInfinite
+				items={techStack}
 				tailwindWrapperRules="p-8 w-full flex items-center gap-32"
 				tailwindChildRules="scale-400"
 			/>
