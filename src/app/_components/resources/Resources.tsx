@@ -15,7 +15,7 @@ const Resources = () => {
 	}
 
 	return (
-		<section className="relative py-12 px-2 bg-bg-alt">
+		<section className="relative mb-10 py-12 px-2 bg-bg-alt">
 			<Wave1 />
 
 			<div className="max-w-screen-xl mx-auto text-center">
