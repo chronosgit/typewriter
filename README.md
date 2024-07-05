@@ -48,4 +48,4 @@ result.
 
 ## Brought with Next.js
 
-Utilizes TypeScript, Tailwind CSS, i18n, GSAP
+Utilizes TypeScript, Tailwind CSS, i18n
