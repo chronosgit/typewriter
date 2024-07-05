@@ -1,27 +1,23 @@
-import Tech from '@/app/_components/tech/Tech';
-import { FC } from 'react';
+import { FC, ReactElement } from 'react';
 
 interface Props {
-	items: any[];
-	tailwindWrapperRules?: string;
-	tailwindChildRules?: string;
+	children: ReactElement[],
 }
 
-const GalleryInfinite: FC<Props> = ({
-	items,
-	tailwindWrapperRules = '',
-	tailwindChildRules = '',
-}) => {
+const GalleryInfinite: FC<Props> = ({children}) => {
+
 	return (
-		<div className={tailwindWrapperRules}>
-			{items.map((i, id) => {
-				return (
-					<div key={i.id || id} className={tailwindChildRules}>
-						<Tech tech={i} />
-					</div>
-				);
-			})}
-		</div>
+		<div className="whitespace-nowrap overflow-hidden">
+			<div className="flex overflow-x-auto overflow-y-hidden">
+				<div className="w-full flex-shrink-0 flex justify-between animate-gallery-scroll">
+					{children}
+				</div>
+
+				<div className="w-full flex-shrink-0 flex justify-between animate-gallery-scroll">
+					{children}
+				</div>
+			</div>
+	</div>
 	);
 };
 
