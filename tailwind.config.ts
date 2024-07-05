@@ -14,6 +14,9 @@ const config: Config = {
 				primary: 'var(--clr-primary)',
 				'primary-alt': 'var(--clr-primary-alt)',
 			},
+			scale: {
+				'400': '4',
+			},
 		},
 	},
 	plugins: [],
