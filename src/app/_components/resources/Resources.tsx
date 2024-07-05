@@ -15,10 +15,10 @@ const Resources = () => {
 	}
 
 	return (
-		<section className="relative mb-10 py-12 px-2 bg-bg-alt">
+		<section className="relative mb-10 bg-bg-alt px-2 py-12">
 			<Wave1 />
 
-			<div className="max-w-screen-xl mx-auto text-center">
+			<div className="mx-auto max-w-screen-xl text-center">
 				<h2 className="mb-6 text-3xl font-bold text-primary-alt">
 					Universe of great insights
 				</h2>

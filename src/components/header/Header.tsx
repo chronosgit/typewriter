@@ -15,12 +15,12 @@ const Header = () => {
 
 	return (
 		<header className="mb-4 p-2 text-primary">
-			<div className="max-w-screen-xl mx-auto flex justify-between items-center">
+			<div className="mx-auto flex max-w-screen-xl items-center justify-between">
 				<Clickable onClick={() => router.push('/')}>
 					<Logo />
 				</Clickable>
 
-				<div className="flex gap-4 items-center">
+				<div className="flex items-center gap-4">
 					<ThemeSwitch />
 
 					<Clickable onClick={toMyGithub}>

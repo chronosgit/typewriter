@@ -27,14 +27,14 @@ const Layout: FC<Props> = ({ children }) => {
 
 	if (!themeCtx?.isPreferReady) {
 		return (
-			<div className="min-h-screen flex justify-center items-center bg-white">
+			<div className="flex min-h-screen items-center justify-center bg-white">
 				<h1 className="text-black">Loading prefered color theme...</h1>
 			</div>
 		);
 	}
 
 	return (
-		<div className="flex flex-col min-h-screen">
+		<div className="flex min-h-screen flex-col">
 			<Header />
 
 			<div className="flex-grow">{children}</div>
