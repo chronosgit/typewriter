@@ -6,8 +6,8 @@ interface Props {
 
 const GalleryInfinite: FC<Props> = ({ children }) => {
 	return (
-		<div className="whitespace-nowrap overflow-hidden">
-			<div className="flex overflow-x-auto overflow-y-hidden">
+		<div className="whitespace-nowrap">
+			<div className="flex overflow-hidden">
 				<div className="w-fit flex-shrink-0 flex justify-between animate-gallery-scroll">
 					{children}
 				</div>
