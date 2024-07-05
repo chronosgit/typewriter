@@ -1,8 +1,19 @@
-import { FC } from 'react';
-import Stat from '@/app/_components/stat/Stat';
-import IStats from '@/types/Stats';
+'use client';
 
-const Stats: FC<IStats> = ({ wordsPerMin, charsPerMin, accuracy }) => {
+import { useContext } from 'react';
+import Stat from '@/app/_components/stat/Stat';
+import SessionContext from '@/contexts/session/SessionContext';
+import exist from '@/utils/exist';
+
+const Stats = () => {
+	const sessionCtx = useContext(SessionContext);
+
+	if (!exist(sessionCtx)) {
+		throw Error('Stats component must use Session context');
+	}
+
+	const { wordsPerMin, charsPerMin, accuracy } = sessionCtx?.stats!;
+
 	return (
 		<div className="flex items-center gap-6">
 			<Stat value={wordsPerMin} label="words/min" />

@@ -3,6 +3,7 @@ import Stats from '@/app/_components/stats/Stats';
 import Field from '@/app/_components/field/Field';
 import getRandomItemFromArray from '@/utils/getRandomItemFromArray';
 import sentences from '@/app/_utils/sentences';
+import { SessionContextProvider } from '@/contexts/session/SessionContext';
 
 const Main = () => {
 	const sentence = getRandomItemFromArray(sentences);
@@ -18,15 +19,17 @@ const Main = () => {
 					Test your typing skills
 				</h2>
 
-				<div className="mb-24 flex flex-col-reverse items-center justify-center gap-10 md:flex-row md:gap-24">
-					<Timer seconds={0} />
+				<SessionContextProvider>
+					<>
+						<div className="mb-24 flex flex-col-reverse items-center justify-center gap-10 md:flex-row md:gap-24">
+							<Timer seconds={0} />
 
-					<Stats wordsPerMin={0} charsPerMin={0} accuracy={0} />
-				</div>
+							<Stats wordsPerMin={0} charsPerMin={0} accuracy={0} />
+						</div>
 
-				<Field 
-					sentence={sentence}
-				/>
+						<Field sentence={sentence} />
+					</>
+				</SessionContextProvider>
 			</div>
 		</section>
 	);
