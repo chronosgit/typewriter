@@ -2,7 +2,7 @@ const Footer = () => {
 	const currentYear = new Date().getFullYear();
 
 	return (
-		<footer className="py-8 border-t border-gray-500">
+		<footer className="py-8 px-2 border-t border-gray-500">
 			<div className="max-w-screen-xl mx-auto opacity-70 text-xs">
 				<p className="mb-6">
 					Copyright © {currentYear} chronosgit. All rights reserved

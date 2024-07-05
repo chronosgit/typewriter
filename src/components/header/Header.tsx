@@ -14,7 +14,7 @@ const Header = () => {
 	};
 
 	return (
-		<header className="mb-4 py-2 text-primary">
+		<header className="mb-4 p-2 text-primary">
 			<div className="max-w-screen-xl mx-auto flex justify-between items-center">
 				<Clickable onClick={() => router.push('/')}>
 					<Logo />
