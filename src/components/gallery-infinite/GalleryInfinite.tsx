@@ -1,11 +1,10 @@
 import { FC, ReactElement } from 'react';
 
 interface Props {
-	children: ReactElement[],
+	children: ReactElement[];
 }
 
-const GalleryInfinite: FC<Props> = ({children}) => {
-
+const GalleryInfinite: FC<Props> = ({ children }) => {
 	return (
 		<div className="whitespace-nowrap overflow-hidden">
 			<div className="flex overflow-x-auto overflow-y-hidden">
@@ -17,7 +16,7 @@ const GalleryInfinite: FC<Props> = ({children}) => {
 					{children}
 				</div>
 			</div>
-	</div>
+		</div>
 	);
 };
 
