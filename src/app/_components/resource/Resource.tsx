@@ -18,7 +18,7 @@ const Resource: FC<Props> = ({ resource }) => {
 
 			<p className="my-5">{resource.descr}</p>
 
-			<div className="underline-animation-center max-w-max flex items-center">
+			<div className="animation_underline_center max-w-max flex items-center">
 				<Link href={resource.linkUrl} className="font-medium">
 					{resource.linkLabel}
 				</Link>

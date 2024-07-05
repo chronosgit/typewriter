@@ -52,11 +52,11 @@ a {
 
 @layer utilities {
 	/* Utilities */
-	.underline-animation-center {
+	.animation_underline_center {
 		position: relative;
 	}
 
-	.underline-animation-center::after {
+	.animation_underline_center::after {
 		position: absolute;
 		content: '';
 		left: 50%;
@@ -69,7 +69,7 @@ a {
 		transition: all 0.2s ease;
 	}
 
-	.underline-animation-center:hover::after {
+	.animation_underline_center:hover::after {
 		width: 100%;
 		left: 0;
 		right: 0;
