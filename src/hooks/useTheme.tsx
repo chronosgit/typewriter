@@ -28,6 +28,7 @@ const useTheme: ThemeHook = () => {
 	useEffect(() => {
 		const onPreferScheme = (e: MediaQueryListEvent) => {
 			e.matches ? toDark() : toLight();
+			setPreferReady(true);
 		};
 
 		const darkModeMediaQuery = window.matchMedia(
