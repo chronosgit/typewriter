@@ -14,6 +14,18 @@ const config: Config = {
 				primary: 'var(--clr-primary)',
 				'primary-alt': 'var(--clr-primary-alt)',
 			},
+			scale: {
+				'400': '4',
+			},
+			keyframes: {
+				'gallery-scroll': {
+					'0%': { transform: 'translateX(0)' },
+					'100%': { transform: 'translateX(-100%)' },
+				},
+			},
+			animation: {
+				'gallery-scroll': 'gallery-scroll 15s linear infinite',
+			},
 		},
 	},
 	plugins: [],

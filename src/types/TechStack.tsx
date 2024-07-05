@@ -1,13 +1,11 @@
 import { Key, ReactElement } from 'react';
 import { Url } from 'next/dist/shared/lib/router/router';
 
-interface Resource {
+interface TechStack {
 	id: Key | null | undefined;
 	name: string;
-	descr: string;
-	linkUrl: Url;
-	linkLabel: string;
-	icon: ReactElement | string;
+	link: Url;
+	icon: ReactElement;
 }
 
-export default Resource;
+export default TechStack;
