@@ -1,5 +1,4 @@
 const Main = () => {
-
 	return (
 		<section className="py-16">
 			<div className="max-w-screen-xl mx-auto">
