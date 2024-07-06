@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Stats from '@/types/Stats';
 import OldWord from '@/types/OldWord';
+import TypedWord from '@/types/TypedWord';
 
 interface FieldProps {
 	words: string[];
@@ -13,7 +14,10 @@ const useField = ({ words: initWords, maxTime }: FieldProps) => {
 
 	const [words, setWords] = useState(initWords);
 	const [curWord, setCurWord] = useState(words[0]);
-	const [typedWord, setTypedWord] = useState('');
+	const [typedWord, setTypedWord] = useState<TypedWord>({
+		value: '',
+		isCorrect: false,
+	});
 
 	const [oldWords, setOldWords] = useState<OldWord[]>([]);
 

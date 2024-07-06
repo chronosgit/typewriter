@@ -1,5 +1,7 @@
 const Cursor = () => {
-	return <div className="h-full w-0.5 bg-black animate-flickering rounded-t-sm rounded-b-sm" />;
+	return (
+		<div className="h-full w-0.5 animate-flickering rounded-b-sm rounded-t-sm bg-black" />
+	);
 };
 
 export default Cursor;
