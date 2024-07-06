@@ -14,10 +14,17 @@ const SessionContext = createContext<Session | null>(null);
 
 const SessionContextProvider: FC<ProviderProps> = ({ children }) => {
 	const sentence = getRandomItemFromArray(sentences);
-	const words = sentence.split(' ');
+	const splittedWords = sentence.split(' ');
 
-	const { startedTyping, remainingTime, curWord, typedWord, stats, oldWords } =
-		useField(words, 60);
+	const {
+		startedTyping,
+		remainingTime,
+		curWord,
+		typedWord,
+		stats,
+		oldWords,
+		words,
+	} = useField({ words: splittedWords, maxTime: 60 });
 
 	return (
 		<SessionContext.Provider
@@ -28,6 +35,7 @@ const SessionContextProvider: FC<ProviderProps> = ({ children }) => {
 				typedWord,
 				stats,
 				oldWords,
+				words,
 			}}
 		>
 			{children}

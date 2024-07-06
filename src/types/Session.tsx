@@ -8,6 +8,7 @@ interface Session {
 	typedWord: string;
 	stats: Stats;
 	oldWords: OldWord[];
+	words: string[];
 }
 
 export default Session;

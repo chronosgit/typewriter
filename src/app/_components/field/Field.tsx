@@ -1,37 +1,51 @@
 'use client';
 
-import { FC, useContext } from 'react';
+import { useContext } from 'react';
+import CallToAction from '@/app/_components/call-to-action/CallToAction';
+import Cursor from '@/app/_components/cursor/Cursor';
 import SessionContext from '@/contexts/session/SessionContext';
 import exist from '@/utils/exist';
 
-interface Props {
-	sentence: string;
-}
-
-const Field: FC<Props> = ({ sentence }) => {
+const Field = () => {
 	const sessionCtx = useContext(SessionContext);
 
 	if (!exist(sessionCtx)) {
 		throw Error('Field component must use Session context');
 	}
 
-	const { startedTyping, curWord, typedWord, oldWords } = sessionCtx!;
+	const { words, startedTyping, curWord, typedWord, oldWords } = sessionCtx!;
 
 	return (
-		<div className="relative mx-auto w-10/12 rounded-2xl bg-white py-12 shadow-lg shadow-gray-400">
-			<div className="overflow-hidden">
-				<p className="translate-x-1/2 overflow-hidden whitespace-nowrap text-3xl font-extralight text-black">
-					{sentence}
-				</p>
-			</div>
+		<div className="mx-auto w-10/12 rounded-2xl bg-white py-12 shadow-lg shadow-gray-400">
+			<div className="grid grid-cols-2">
+				<div className="bg-red-200"></div>
 
-			{/* Call to action */}
-			<div className="pointer-events-none absolute left-1/2 top-0 z-50 -translate-x-1/2 animate-bounce rounded-md bg-yellow-400 px-2 py-1">
 				<div className="relative">
-					<p className="text-sm font-light text-black">Start typing</p>
+					<div className="flex items-center gap-2 overflow-hidden whitespace-nowrap bg-yellow-100">
+						{words.map((word, i) => {
+							return (
+								<p
+									key={word + i.toString()}
+									className="text-3xl font-extralight text-black"
+								>
+									{word}
+								</p>
+							);
+						})}
+					</div>
 
-					{/* Acute thingy in the bottom */}
-					<div className="absolute top-0 -z-40 size-4 translate-x-7 translate-y-3 rotate-45 bg-yellow-400" />
+					{
+						/* Call to action */
+						!startedTyping && (
+							<div className="pointer-events-none absolute -left-11 bottom-16">
+								<CallToAction text="Start typing" />
+							</div>
+						)
+					}
+
+					<div className="absolute -left-1 top-0 h-full scale-y-125">
+						<Cursor />
+					</div>
 				</div>
 			</div>
 		</div>

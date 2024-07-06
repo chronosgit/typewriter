@@ -2,10 +2,16 @@ import { useState } from 'react';
 import Stats from '@/types/Stats';
 import OldWord from '@/types/OldWord';
 
-const useField = (words: string[], maxTime: number) => {
+interface FieldProps {
+	words: string[];
+	maxTime: number;
+}
+
+const useField = ({ words: initWords, maxTime }: FieldProps) => {
 	const [isStarted, setStarted] = useState(false);
 	const [timerTime, setTimerTime] = useState(maxTime);
 
+	const [words, setWords] = useState(initWords);
 	const [curWord, setCurWord] = useState(words[0]);
 	const [typedWord, setTypedWord] = useState('');
 
@@ -24,6 +30,7 @@ const useField = (words: string[], maxTime: number) => {
 		oldWords,
 		typedWord,
 		stats,
+		words,
 	};
 };
 

@@ -1,13 +1,10 @@
 import Timer from '@/app/_components/timer/Timer';
 import Stats from '@/app/_components/stats/Stats';
 import Field from '@/app/_components/field/Field';
-import getRandomItemFromArray from '@/utils/getRandomItemFromArray';
-import sentences from '@/app/_utils/sentences';
 import { SessionContextProvider } from '@/contexts/session/SessionContext';
+import getRandomItemFromArray from '@/utils/getRandomItemFromArray';
 
 const Main = () => {
-	const sentence = getRandomItemFromArray(sentences);
-
 	return (
 		<section className="py-16">
 			<div className="mx-auto max-w-screen-xl">
@@ -22,12 +19,12 @@ const Main = () => {
 				<SessionContextProvider>
 					<>
 						<div className="mb-24 flex flex-col-reverse items-center justify-center gap-10 md:flex-row md:gap-24">
-							<Timer seconds={0} />
+							<Timer />
 
-							<Stats wordsPerMin={0} charsPerMin={0} accuracy={0} />
+							<Stats />
 						</div>
 
-						<Field sentence={sentence} />
+						<Field />
 					</>
 				</SessionContextProvider>
 			</div>
