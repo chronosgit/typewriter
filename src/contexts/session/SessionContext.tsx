@@ -19,11 +19,14 @@ const SessionContextProvider: FC<ProviderProps> = ({ children }) => {
 	const {
 		startedTyping,
 		remainingTime,
-		curWord,
+		curWordId,
 		typedWord,
 		stats,
 		oldWords,
 		words,
+		onComplete,
+		onType,
+		onBackspace,
 	} = useField({ words: splittedWords, maxTime: 60 });
 
 	return (
@@ -31,11 +34,14 @@ const SessionContextProvider: FC<ProviderProps> = ({ children }) => {
 			value={{
 				startedTyping,
 				remainingTime,
-				curWord,
+				curWordId,
 				typedWord,
 				stats,
 				oldWords,
 				words,
+				onComplete,
+				onType,
+				onBackspace,
 			}}
 		>
 			{children}

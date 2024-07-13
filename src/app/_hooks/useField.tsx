@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import Stats from '@/types/Stats';
-import OldWord from '@/types/OldWord';
+import FinishedWord from '@/types/FinishedWord';
 import TypedWord from '@/types/TypedWord';
 
 interface FieldProps {
@@ -9,32 +8,42 @@ interface FieldProps {
 }
 
 const useField = ({ words: initWords, maxTime }: FieldProps) => {
-	const [isStarted, setStarted] = useState(false);
-	const [timerTime, setTimerTime] = useState(maxTime);
+	// 15 words, first word is future activeWord
+	const [wordsQueue, setWordsQueue] = useState([]);
 
-	const [words, setWords] = useState(initWords);
-	const [curWord, setCurWord] = useState(words[0]);
-	const [typedWord, setTypedWord] = useState<TypedWord>({
-		value: '',
-		isCorrect: false,
-	});
+	const [finishedWords, setFinishedWords] = useState<FinishedWord[]>([]);
 
-	const [oldWords, setOldWords] = useState<OldWord[]>([]);
+	const [activeWord, setActiveWord] = useState('');
 
-	const [stats, setStats] = useState<Stats>({
-		wordsPerMin: 0,
-		charsPerMin: 0,
-		accuracy: 0,
-	});
+	const typedWordDefault: TypedWord = { value: '', isCorrect: false };
+	const [typedWord, setTypedWord] = useState<TypedWord>(typedWordDefault);
+
+	const updateWordsQueue = () => {};
+
+	const onType = (char: string) => {};
+
+	const onBackspace = () => {};
+
+	const onComplete = () => {
+		// TODO: Check if we just started
+		updateWordsQueue();
+
+		setFinishedWords(p => [...p, typedWord]);
+
+		// Do we need to wait until queue gets updated?
+		setActiveWord(wordsQueue[0]);
+
+		setTypedWord(typedWordDefault);
+	};
 
 	return {
-		startedTyping: isStarted,
-		remainingTime: timerTime,
-		curWord,
-		oldWords,
+		wordsQueue,
+		finishedWords,
+		activeWord,
 		typedWord,
-		stats,
-		words,
+		onType,
+		onBackspace,
+		onComplete,
 	};
 };
 
