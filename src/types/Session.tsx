@@ -4,11 +4,11 @@ import TypedWord from './TypedWord';
 
 interface Session {
 	startedTyping: Boolean;
-	remainingTime: number;
-	curWordId: number;
-	typedWord: TypedWord;
 	stats: Stats;
-	oldWords: OldWord[];
+	remainingTime: number | null;
+	activeWord: string;
+	typedWord: TypedWord;
+	finishedWords: OldWord[];
 	words: string[];
 	onComplete: () => void;
 	onType: (char: string) => void;

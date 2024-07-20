@@ -1,6 +1,6 @@
 interface Stats {
-	wordsPerMin: number;
-	charsPerMin: number;
+	wordsPerTime: number;
+	charsPerTime: number;
 	accuracy: number;
 }
 

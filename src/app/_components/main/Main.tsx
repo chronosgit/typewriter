@@ -2,7 +2,6 @@ import Timer from '@/app/_components/timer/Timer';
 import Stats from '@/app/_components/stats/Stats';
 import Field from '@/app/_components/field/Field';
 import { SessionContextProvider } from '@/contexts/session/SessionContext';
-import getRandomItemFromArray from '@/utils/getRandomItemFromArray';
 
 const Main = () => {
 	return (
