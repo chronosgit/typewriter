@@ -36,6 +36,11 @@ body {
 	background-color: var(--clr-bg);
 }
 
+::selection {
+  background-color: #ff8086; /* Background color of the selected text */
+  color: #fff; /* Text color of the selected text */
+}
+
 button {
 	cursor: pointer;
 }
