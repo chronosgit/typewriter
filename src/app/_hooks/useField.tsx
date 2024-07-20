@@ -9,8 +9,8 @@ interface FieldProps {
 }
 
 const useField = ({ words: initWords, maxTime }: FieldProps) => {
-	const {startedTyping, remainingTime} = useTime(maxTime);
-	
+	const { startedTyping, remainingTime } = useTime(maxTime);
+
 	const [stats, setStats] = useState({
 		wordsPerTime: 0,
 		charsPerTime: 0,

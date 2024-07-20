@@ -13,7 +13,7 @@ const Field = () => {
 		throw Error('Field component must use Session context');
 	}
 
-	const { finishedWords, typedWord, words, startedTyping, } = sessionCtx!;
+	const { finishedWords, typedWord, words, startedTyping } = sessionCtx!;
 
 	return (
 		<div className="mx-auto w-10/12 rounded-2xl bg-white py-12 shadow-lg shadow-gray-400">
