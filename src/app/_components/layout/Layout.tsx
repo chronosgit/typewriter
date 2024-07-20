@@ -17,7 +17,7 @@ const Layout: FC<Props> = ({ children }) => {
 
 	const themeCtx = useContext(ThemeContext);
 
-	if(!exist(themeCtx)) {
+	if (!exist(themeCtx)) {
 		throw Error('Custom root layout must use theme context');
 	}
 
@@ -25,16 +25,16 @@ const Layout: FC<Props> = ({ children }) => {
 		return <>{children}</>;
 	}
 
-	if(!themeCtx?.isPreferReady) {
+	if (!themeCtx?.isPreferReady) {
 		return (
-			<div className="min-h-screen flex justify-center items-center bg-white">
+			<div className="flex min-h-screen items-center justify-center bg-white">
 				<h1 className="text-black">Loading prefered color theme...</h1>
 			</div>
 		);
 	}
 
 	return (
-		<div className="flex flex-col min-h-screen">
+		<div className="flex min-h-screen flex-col">
 			<Header />
 
 			<div className="flex-grow">{children}</div>

@@ -22,9 +22,15 @@ const config: Config = {
 					'0%': { transform: 'translateX(0)' },
 					'100%': { transform: 'translateX(-100%)' },
 				},
+				flickering: {
+					from: { opacity: '1' },
+					'50%': { opacity: '0' },
+					to: { opacity: '1' },
+				},
 			},
 			animation: {
 				'gallery-scroll': 'gallery-scroll 15s linear infinite',
+				flickering: 'flickering 1s linear infinite',
 			},
 		},
 	},

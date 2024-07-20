@@ -9,7 +9,7 @@ interface Props {
 
 const Resource: FC<Props> = ({ resource }) => {
 	return (
-		<div className="p-10 flex flex-col justify-between bg-bg rounded-lg text-left">
+		<div className="flex flex-col justify-between rounded-lg bg-bg p-10 text-left">
 			<div>
 				<div className="flex items-center gap-2">
 					<div className="scale-150">{resource.icon}</div>
@@ -20,13 +20,13 @@ const Resource: FC<Props> = ({ resource }) => {
 				<p className="my-5">{resource.descr}</p>
 			</div>
 
-			<div className="animation_underline_center max-w-max flex items-center">
+			<div className="animation_underline_center flex max-w-max items-center">
 				<Link href={resource.linkUrl} target="_blank" className="font-medium">
 					{resource.linkLabel}
 				</Link>
 
 				<div className="scale-150 cursor-pointer">
-					<RxCaretRight className="transition ease-linear duration-200" />
+					<RxCaretRight className="transition duration-200 ease-linear" />
 				</div>
 			</div>
 		</div>

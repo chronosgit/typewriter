@@ -8,11 +8,11 @@ const GalleryInfinite: FC<Props> = ({ children }) => {
 	return (
 		<div className="whitespace-nowrap">
 			<div className="flex overflow-hidden">
-				<div className="w-fit flex-shrink-0 flex justify-between animate-gallery-scroll">
+				<div className="flex w-fit flex-shrink-0 animate-gallery-scroll justify-between">
 					{children}
 				</div>
 
-				<div className="w-fit flex-shrink-0 flex justify-between animate-gallery-scroll">
+				<div className="flex w-fit flex-shrink-0 animate-gallery-scroll justify-between">
 					{children}
 				</div>
 			</div>

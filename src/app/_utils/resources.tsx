@@ -7,7 +7,7 @@ const resourcesMock: Resource[] = [
 	{
 		id: '1',
 		name: 'Github',
-		descr: 'Checkout my other amazing stuff on github!',
+		descr: 'Check out my other amazing stuff on github!',
 		linkUrl: 'https://github.com/chronosgit',
 		linkLabel: 'Check profile',
 		icon: <FiGithub />,
@@ -15,7 +15,7 @@ const resourcesMock: Resource[] = [
 	{
 		id: '2',
 		name: 'Linkedin',
-		descr: "Let' connect on Linkedin!",
+		descr: "Let's connect on Linkedin!",
 		linkUrl: 'https://kz.linkedin.com/in/nurken-kidirmaganbetov-338b412aa',
 		linkLabel: 'Connect',
 		icon: <LiaLinkedin />,
