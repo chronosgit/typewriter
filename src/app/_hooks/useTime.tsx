@@ -4,7 +4,9 @@ const useTime = (maxTime: number) => {
 	const [startedTyping, setStartedTyping] = useState(false);
 	const [remainingTime, setRemainingTime] = useState(maxTime);
 
-	return { startedTyping, remainingTime };
+	const startTyping = () => setStartedTyping(true);
+
+	return { startedTyping, startTyping, remainingTime };
 };
 
 export default useTime;
