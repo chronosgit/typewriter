@@ -17,13 +17,13 @@ const SessionContextProvider: FC<ProviderProps> = ({ children }) => {
 	const splittedWords = sentence.split(' ');
 
 	const {
+		wordsQueue,
 		startedTyping,
 		remainingTime,
-		curWordId,
-		typedWord,
 		stats,
-		oldWords,
-		words,
+		activeWord,
+		typedWord,
+		finishedWords,
 		onComplete,
 		onType,
 		onBackspace,
@@ -32,13 +32,13 @@ const SessionContextProvider: FC<ProviderProps> = ({ children }) => {
 	return (
 		<SessionContext.Provider
 			value={{
+				words: wordsQueue,
 				startedTyping,
 				remainingTime,
-				curWordId,
-				typedWord,
 				stats,
-				oldWords,
-				words,
+				activeWord,
+				typedWord,
+				finishedWords,
 				onComplete,
 				onType,
 				onBackspace,

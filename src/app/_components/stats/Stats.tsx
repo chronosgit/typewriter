@@ -12,13 +12,13 @@ const Stats = () => {
 		throw Error('Stats component must use Session context');
 	}
 
-	const { wordsPerMin, charsPerMin, accuracy } = sessionCtx?.stats!;
+	const { wordsPerTime, charsPerTime, accuracy } = sessionCtx?.stats!;
 
 	return (
 		<div className="flex items-center gap-6">
-			<Stat value={wordsPerMin} label="words/min" />
+			<Stat value={wordsPerTime} label="words/min" />
 
-			<Stat value={charsPerMin} label="chars/min" />
+			<Stat value={charsPerTime} label="chars/min" />
 
 			<Stat value={accuracy} label="% accuracy" />
 		</div>
