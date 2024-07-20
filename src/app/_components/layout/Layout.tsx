@@ -26,7 +26,7 @@ const Layout: FC<Props> = ({ children }) => {
 		return <>{children}</>;
 	}
 
-	if (themeCtx?.isPreferReady) {
+	if (!themeCtx?.isPreferReady) {
 		return (
 			<div className="flex flex-col min-h-screen items-center justify-center gap-4 bg-white">
 				<ScaleLoader />
