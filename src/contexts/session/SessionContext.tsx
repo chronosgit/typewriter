@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, FC, ReactElement } from 'react';
+import { createContext, FC, ReactElement, useEffect, useState } from 'react';
 import Session from '@/types/Session';
 import useField from '@/app/_hooks/useField';
 import sentences from '@/app/_utils/sentences';
@@ -13,30 +13,49 @@ interface ProviderProps {
 const SessionContext = createContext<Session | null>(null);
 
 const SessionContextProvider: FC<ProviderProps> = ({ children }) => {
-	const sentence = getRandomItemFromArray(sentences);
-	const splittedWords = sentence.split(' ');
+	const [words, setWords] = useState<string[]>([]);
 
 	const {
-		wordsQueue,
+		stats,
 		startedTyping,
 		remainingTime,
-		stats,
-		activeWord,
-		typedWord,
+		wordsQueue,
 		finishedWords,
-		onComplete,
+		activeWord,
+		activeWordRemovedPart,
+		isFinishScreenSeen,
+		typedWord,
+		completeCalled,
+		isTimeOver,
 		onType,
 		onBackspace,
-	} = useField({ words: splittedWords, maxTime: 60 });
+		resetSession,
+		onComplete,
+	} = useField({ words });
+
+	useEffect(() => {
+		if (isTimeOver === false) {
+			return;
+		}
+
+		const splittedWords = getRandomItemFromArray(sentences).split(' ');
+
+		setWords(splittedWords);
+	}, [isTimeOver]);
 
 	return (
 		<SessionContext.Provider
 			value={{
 				words: wordsQueue,
 				startedTyping,
+				isTimeOver,
+				resetSession,
 				remainingTime,
 				stats,
+				completeCalled,
+				isFinishScreenSeen,
 				activeWord,
+				activeWordRemovedPart,
 				typedWord,
 				finishedWords,
 				onComplete,

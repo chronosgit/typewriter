@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect } from 'react';
 import KeyDownHandler from '@/types/KeyDownHandler';
 import TypedWord from '@/types/TypedWord';
@@ -8,19 +10,32 @@ interface Args {
 	onType: (char: string) => void;
 	startedTyping: Boolean;
 	activeWord: string;
+	activeWordRemovedPart: string;
+	completeCalled: Boolean;
 	typedWord: TypedWord;
 }
 
-const useKeyboard = ({ onComplete, onType, onBackspace, startedTyping, activeWord, typedWord,  }: Args) => {
+const useKeyboard = ({
+	onComplete,
+	onType,
+	onBackspace,
+	startedTyping,
+	completeCalled,
+	activeWord,
+	activeWordRemovedPart,
+	typedWord,
+}: Args) => {
 	useEffect(() => {
 		const downHandler: KeyDownHandler = event => {
 			const { key } = event;
 
 			if (key === 'Enter' || key === ' ') {
+				if (completeCalled) return;
+
 				onComplete();
 			} else if (key === 'Backspace') {
 				onBackspace();
-			} else if (key.length === 1 && /^[a-zA-Z0-9]$/.test(key)) {
+			} else if (key.length === 1 && /^[a-zA-Z0-9"',.!?]$/.test(key)) {
 				onType(key);
 			}
 		};
@@ -30,7 +45,7 @@ const useKeyboard = ({ onComplete, onType, onBackspace, startedTyping, activeWor
 		return () => {
 			window.removeEventListener('keydown', downHandler);
 		};
-	}, [startedTyping, activeWord, typedWord,]);
+	}, [startedTyping, activeWord, typedWord, activeWordRemovedPart]);
 };
 
 export default useKeyboard;

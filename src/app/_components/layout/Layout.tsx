@@ -26,16 +26,6 @@ const Layout: FC<Props> = ({ children }) => {
 		return <>{children}</>;
 	}
 
-	if (!themeCtx?.isPreferReady) {
-		return (
-			<div className="flex flex-col min-h-screen items-center justify-center gap-4 bg-white">
-				<ScaleLoader />
-
-				<h1 className="text-black">Loading prefered color theme...</h1>
-			</div>
-		);
-	}
-
 	return (
 		<div className="flex min-h-screen flex-col">
 			<Header />

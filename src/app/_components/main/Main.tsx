@@ -1,6 +1,7 @@
 import Timer from '@/app/_components/timer/Timer';
 import Stats from '@/app/_components/stats/Stats';
 import Field from '@/app/_components/field/Field';
+import FinishScreen from '@/app/_components/finish_screen/FinishScreen';
 import { SessionContextProvider } from '@/contexts/session/SessionContext';
 
 const Main = () => {
@@ -21,6 +22,8 @@ const Main = () => {
 							<Timer />
 
 							<Stats />
+
+							<FinishScreen />
 						</div>
 
 						<Field />

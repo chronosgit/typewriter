@@ -14,15 +14,35 @@ const Field = () => {
 		throw Error('Field component must use Session context');
 	}
 
-	const { activeWord, finishedWords, typedWord, words, startedTyping, onType, onBackspace, onComplete } = sessionCtx!;
+	const {
+		activeWord,
+		activeWordRemovedPart,
+		finishedWords,
+		typedWord,
+		words,
+		startedTyping,
+		onType,
+		completeCalled,
+		onBackspace,
+		onComplete,
+	} = sessionCtx!;
 
-	useKeyboard({onType, onBackspace, onComplete, startedTyping, activeWord, typedWord });
+	useKeyboard({
+		onType,
+		onBackspace,
+		onComplete,
+		startedTyping,
+		activeWord,
+		activeWordRemovedPart,
+		completeCalled,
+		typedWord,
+	});
 
 	return (
 		<div className="mx-auto w-10/12 rounded-2xl bg-white py-12 shadow-lg shadow-gray-400">
 			<div className="grid grid-cols-2">
 				{/* Finished words */}
-				<div className="flex justify-end gap-2 pr-2 overflow-hidden">
+				<div className="flex justify-end gap-2 overflow-hidden pr-2">
 					<div className="flex items-center gap-2 whitespace-nowrap">
 						{finishedWords.map((finishedWord, i) => {
 							return (
@@ -37,22 +57,18 @@ const Field = () => {
 					</div>
 
 					{typedWord.isCorrect ? (
-							<p className="text-3xl font-extralight text-blue-700">
-								{typedWord.value}
-							</p>
-						) : (
-							<p className="text-3xl font-extralight text-blue-700 line-through decoration-blue-900">
-								{typedWord.value}
-							</p>
-						)}
+						<p className="text-3xl text-blue-700">{typedWord.value}</p>
+					) : (
+						<p className="text-3xl text-blue-700 line-through decoration-blue-900">
+							{typedWord.value}
+						</p>
+					)}
 				</div>
 
 				{/* Words to type */}
 				<div className="relative">
 					<div className="flex items-center gap-2 overflow-hidden whitespace-nowrap">
-						<p className="text-3xl font-light">
-							{activeWord}
-						</p>
+						<p className="text-3xl font-light text-black">{activeWord}</p>
 
 						{words.map((word, i) => {
 							return (
@@ -79,10 +95,7 @@ const Field = () => {
 					<div className="absolute -left-0.5 top-0 h-full scale-y-125">
 						<Cursor />
 
-						<input 
-							id="field_cursor"
-							className='opacity-0 size-0.5'
-						/>
+						<input id="field_cursor" className="size-0.5 opacity-0" />
 					</div>
 				</div>
 			</div>

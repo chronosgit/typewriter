@@ -37,8 +37,8 @@ body {
 }
 
 ::selection {
-  background-color: #ff8086; /* Background color of the selected text */
-  color: #fff; /* Text color of the selected text */
+	background-color: #ff8086; /* Background color of the selected text */
+	color: #fff; /* Text color of the selected text */
 }
 
 button {
