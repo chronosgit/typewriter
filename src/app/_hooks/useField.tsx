@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { useEffect, useState } from 'react';
 import FinishedWord from '@/types/FinishedWord';
@@ -21,13 +21,14 @@ const useField = ({ words: initWords, maxTime }: FieldProps) => {
 
 	const [originalWord, setOriginalWord] = useState<string>(initWords[0]);
 	const [activeWord, setActiveWord] = useState<string>(initWords[0]);
-	const [activeWordRemovedPart, setActiveWordRemovedPart] = useState<string>('');
+	const [activeWordRemovedPart, setActiveWordRemovedPart] =
+		useState<string>('');
 
 	// 15 words, first word is future activeWord
 	const [wordsQueue, setWordsQueue] = useState(initWords.slice(1));
 
 	const [finishedWords, setFinishedWords] = useState<FinishedWord[]>([]);
-	
+
 	const typedWordDefault: TypedWord = { value: '', isCorrect: false };
 	const [typedWord, setTypedWord] = useState<TypedWord>(typedWordDefault);
 
@@ -43,13 +44,14 @@ const useField = ({ words: initWords, maxTime }: FieldProps) => {
 	};
 
 	const onType = (char: string) => {
-		if(!startedTyping) {
+		if (!startedTyping) {
 			return;
 		}
 
 		const newTypedWord = typedWord.value + char;
 
-		if(originalWord.startsWith(newTypedWord)) { // Valid typing
+		if (originalWord.startsWith(newTypedWord)) {
+			// Valid typing
 			setActiveWordRemovedPart(p => p + activeWord[0]); // TODO: investigate
 			setActiveWord(p => p.slice(1)); // TODO: investigate
 
@@ -57,7 +59,8 @@ const useField = ({ words: initWords, maxTime }: FieldProps) => {
 				value: newTypedWord,
 				isCorrect: true,
 			});
-		} else { // Invalid
+		} else {
+			// Invalid
 			setTypedWord({
 				value: newTypedWord,
 				isCorrect: false,
@@ -66,13 +69,14 @@ const useField = ({ words: initWords, maxTime }: FieldProps) => {
 	};
 
 	const onBackspace = () => {
-		if(!startedTyping) {
+		if (!startedTyping) {
 			return;
 		}
 
 		const newTypedWord = typedWord.value.slice(0, typedWord.value.length - 1);
 
-		if(originalWord.startsWith(newTypedWord)) { // Valid word now
+		if (originalWord.startsWith(newTypedWord)) {
+			// Valid word now
 			setActiveWord(p => activeWordRemovedPart[0] + p); // TODO: investigate
 			setActiveWordRemovedPart(p => p.slice(0, p.length - 1)); // TODO: investigate
 
@@ -80,7 +84,8 @@ const useField = ({ words: initWords, maxTime }: FieldProps) => {
 				value: newTypedWord,
 				isCorrect: true,
 			});
-		} else { // Invalid
+		} else {
+			// Invalid
 			setTypedWord({
 				value: newTypedWord,
 				isCorrect: false,
@@ -89,14 +94,14 @@ const useField = ({ words: initWords, maxTime }: FieldProps) => {
 	};
 
 	const onComplete = () => {
-		if(!startedTyping) {
+		if (!startedTyping) {
 			startTyping();
 
 			document.getElementById('field_cursor')?.focus();
 			return;
 		}
 
-		if(typedWord.value.length === 0) {
+		if (typedWord.value.length === 0) {
 			return;
 		}
 
@@ -107,7 +112,7 @@ const useField = ({ words: initWords, maxTime }: FieldProps) => {
 		updateWordsQueue();
 
 		setFinishedWords(p => {
-			return [...p, typedWord]
+			return [...p, typedWord];
 		});
 
 		setTypedWord(typedWordDefault);

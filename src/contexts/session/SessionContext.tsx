@@ -12,7 +12,7 @@ interface ProviderProps {
 
 const SessionContext = createContext<Session | null>(null);
 
-const SessionContextProvider: FC<ProviderProps> = ({ children, }) => {
+const SessionContextProvider: FC<ProviderProps> = ({ children }) => {
 	const [words, setWords] = useState<string[]>([]);
 
 	useEffect(() => {
