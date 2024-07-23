@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useState } from 'react';
 import FinishedWord from '@/types/FinishedWord';
 import TypedWord from '@/types/TypedWord';
@@ -17,9 +19,9 @@ const useField = ({ words: initWords, maxTime }: FieldProps) => {
 		accuracy: 0,
 	});
 
-	const [originalWord, setOriginalWord] = useState(initWords[0]);
-	const [activeWord, setActiveWord] = useState(initWords[0]);
-	const [activeWordRemovedChars, setActiveWordRemovedChars] = useState('');
+	const [originalWord, setOriginalWord] = useState<string>(initWords[0]);
+	const [activeWord, setActiveWord] = useState<string>(initWords[0]);
+	const [activeWordRemovedPart, setActiveWordRemovedPart] = useState<string>('');
 
 	// 15 words, first word is future activeWord
 	const [wordsQueue, setWordsQueue] = useState(initWords.slice(1));
@@ -29,20 +31,27 @@ const useField = ({ words: initWords, maxTime }: FieldProps) => {
 	const typedWordDefault: TypedWord = { value: '', isCorrect: false };
 	const [typedWord, setTypedWord] = useState<TypedWord>(typedWordDefault);
 
+	useEffect(() => {
+		setOriginalWord(initWords[0]);
+		setActiveWord(initWords[0]);
+
+		setWordsQueue(initWords.slice(1));
+	}, [initWords]);
+
 	const updateWordsQueue = () => {
 		setWordsQueue(p => p.slice(1));
 	};
 
 	const onType = (char: string) => {
+		if(!startedTyping) {
+			return;
+		}
+
 		const newTypedWord = typedWord.value + char;
 
 		if(originalWord.startsWith(newTypedWord)) { // Valid typing
-			setActiveWordRemovedChars(activeWord[0]);
-			setActiveWord(p => {
-				console.log(p.slice(1));
-
-				return p.slice(1);
-			});
+			setActiveWordRemovedPart(p => p + activeWord[0]); // TODO: investigate
+			setActiveWord(p => p.slice(1)); // TODO: investigate
 
 			setTypedWord({
 				value: newTypedWord,
@@ -57,11 +66,15 @@ const useField = ({ words: initWords, maxTime }: FieldProps) => {
 	};
 
 	const onBackspace = () => {
+		if(!startedTyping) {
+			return;
+		}
+
 		const newTypedWord = typedWord.value.slice(0, typedWord.value.length - 1);
 
-		if(originalWord.startsWith(newTypedWord)) { // Valid typing
-			setActiveWordRemovedChars(activeWord[0]);
-			setActiveWord(p => p);
+		if(originalWord.startsWith(newTypedWord)) { // Valid word now
+			setActiveWord(p => activeWordRemovedPart[0] + p); // TODO: investigate
+			setActiveWordRemovedPart(p => p.slice(0, p.length - 1)); // TODO: investigate
 
 			setTypedWord({
 				value: newTypedWord,
@@ -100,10 +113,6 @@ const useField = ({ words: initWords, maxTime }: FieldProps) => {
 		setTypedWord(typedWordDefault);
 	};
 
-	useEffect(() => {
-		console.log(startedTyping);
-	}, [startedTyping]);
-
 	return {
 		stats,
 		startedTyping,
@@ -111,6 +120,7 @@ const useField = ({ words: initWords, maxTime }: FieldProps) => {
 		wordsQueue,
 		finishedWords,
 		activeWord,
+		activeWordRemovedPart,
 		typedWord,
 		onType,
 		onBackspace,

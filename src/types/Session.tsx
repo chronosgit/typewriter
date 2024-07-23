@@ -7,6 +7,7 @@ interface Session {
 	stats: Stats;
 	remainingTime: number | null;
 	activeWord: string;
+	activeWordRemovedPart: string;
 	typedWord: TypedWord;
 	finishedWords: OldWord[];
 	words: string[];
