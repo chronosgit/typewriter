@@ -9,7 +9,7 @@ const useTime = (maxTime: number) => {
 	const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
 
 	const startTimer = () => {
-		if(timer) {
+		if (timer) {
 			clearInterval(timer);
 		}
 
@@ -23,7 +23,7 @@ const useTime = (maxTime: number) => {
 	};
 
 	const stopTimer = () => {
-		if(timer) {
+		if (timer) {
 			clearInterval(timer);
 			setTimer(null);
 		}
@@ -31,7 +31,7 @@ const useTime = (maxTime: number) => {
 
 	const startTyping = () => {
 		setStartedTyping(true);
-		
+
 		startTimer();
 	};
 

@@ -30,8 +30,8 @@ const useKeyboard = ({
 			const { key } = event;
 
 			if (key === 'Enter' || key === ' ') {
-				if(completeCalled) return;
-				
+				if (completeCalled) return;
+
 				onComplete();
 			} else if (key === 'Backspace') {
 				onBackspace();
