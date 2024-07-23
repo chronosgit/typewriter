@@ -1,10 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const useTime = (maxTime: number) => {
 	const [startedTyping, setStartedTyping] = useState(false);
 	const [remainingTime, setRemainingTime] = useState(maxTime);
+	const [isTimeOver, setTimeOver] = useState<Boolean | null>(null);
 
 	const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
 
@@ -13,11 +14,7 @@ const useTime = (maxTime: number) => {
 			clearInterval(timer);
 		}
 
-		const newTimer = setInterval(() => {
-			console.log(remainingTime);
-
-			setRemainingTime(p => p - 1);
-		}, 1000);
+		const newTimer = setInterval(() => setRemainingTime(p => p - 1), 1000);
 
 		setTimer(newTimer);
 	};
@@ -31,11 +28,26 @@ const useTime = (maxTime: number) => {
 
 	const startTyping = () => {
 		setStartedTyping(true);
-
 		startTimer();
+		setTimeOver(false);
 	};
 
-	return { startedTyping, startTyping, remainingTime, startTimer, stopTimer };
+	useEffect(() => {
+		if (remainingTime === 0) {
+			stopTimer();
+			setTimeOver(true);
+		}
+	}, [remainingTime]);
+
+	return {
+		startedTyping,
+		startTyping,
+		remainingTime,
+		startTimer,
+		isTimeOver,
+		setStartedTyping,
+		setRemainingTime,
+	};
 };
 
 export default useTime;

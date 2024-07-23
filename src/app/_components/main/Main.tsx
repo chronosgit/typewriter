@@ -1,10 +1,8 @@
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Timer from '@/app/_components/timer/Timer';
 import Stats from '@/app/_components/stats/Stats';
 import Field from '@/app/_components/field/Field';
+import FinishScreen from '@/app/_components/finish_screen/FinishScreen';
 import { SessionContextProvider } from '@/contexts/session/SessionContext';
-import getRandomItemFromArray from '@/utils/getRandomItemFromArray';
-import sentences from '@/app/_utils/sentences';
 
 const Main = () => {
 	return (
@@ -24,6 +22,8 @@ const Main = () => {
 							<Timer />
 
 							<Stats />
+
+							<FinishScreen />
 						</div>
 
 						<Field />

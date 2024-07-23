@@ -15,35 +15,45 @@ const SessionContext = createContext<Session | null>(null);
 const SessionContextProvider: FC<ProviderProps> = ({ children }) => {
 	const [words, setWords] = useState<string[]>([]);
 
+	const {
+		stats,
+		startedTyping,
+		remainingTime,
+		wordsQueue,
+		finishedWords,
+		activeWord,
+		activeWordRemovedPart,
+		isFinishScreenSeen,
+		typedWord,
+		completeCalled,
+		isTimeOver,
+		onType,
+		onBackspace,
+		resetSession,
+		onComplete,
+	} = useField({ words, maxTime: 5 });
+
 	useEffect(() => {
+		if (isTimeOver === false) {
+			return;
+		}
+
 		const splittedWords = getRandomItemFromArray(sentences).split(' ');
 
 		setWords(splittedWords);
-	}, []);
-
-	const {
-		wordsQueue,
-		startedTyping,
-		remainingTime,
-		stats,
-		activeWord,
-		activeWordRemovedPart,
-		typedWord,
-		finishedWords,
-		completeCalled,
-		onComplete,
-		onType,
-		onBackspace,
-	} = useField({ words, maxTime: 60 });
+	}, [isTimeOver]);
 
 	return (
 		<SessionContext.Provider
 			value={{
 				words: wordsQueue,
 				startedTyping,
+				isTimeOver,
+				resetSession,
 				remainingTime,
 				stats,
 				completeCalled,
+				isFinishScreenSeen,
 				activeWord,
 				activeWordRemovedPart,
 				typedWord,

@@ -11,13 +11,23 @@ interface FieldProps {
 }
 
 const useField = ({ words: initWords, maxTime }: FieldProps) => {
-	const { startedTyping, startTyping, remainingTime } = useTime(maxTime);
+	const {
+		startedTyping,
+		startTyping,
+		remainingTime,
+		isTimeOver,
+		setRemainingTime,
+		setStartedTyping,
+	} = useTime(maxTime);
+	const [completeCalled, setCompleteCalled] = useState(false);
+	const [isFinishScreenSeen, setFinishScreenSeen] = useState(false);
 
-	const [stats, setStats] = useState({
+	const statsDefault = {
 		wordsPerTime: 0,
 		charsPerTime: 0,
 		accuracy: 0,
-	});
+	};
+	const [stats, setStats] = useState(statsDefault);
 
 	const [originalWord, setOriginalWord] = useState<string>(initWords[0]);
 	const [activeWord, setActiveWord] = useState<string>(initWords[0]);
@@ -26,20 +36,9 @@ const useField = ({ words: initWords, maxTime }: FieldProps) => {
 
 	// 15 words, first word is future activeWord
 	const [wordsQueue, setWordsQueue] = useState(initWords.slice(1));
-
 	const [finishedWords, setFinishedWords] = useState<FinishedWord[]>([]);
-
 	const typedWordDefault: TypedWord = { value: '', isCorrect: false };
 	const [typedWord, setTypedWord] = useState<TypedWord>(typedWordDefault);
-
-	const [completeCalled, setCompleteCalled] = useState(false);
-
-	useEffect(() => {
-		setOriginalWord(initWords[0]);
-		setActiveWord(initWords[0]);
-
-		setWordsQueue(initWords.slice(1));
-	}, [initWords]);
 
 	const updateWordsQueue = () => {
 		setWordsQueue(p => p.slice(1));
@@ -106,13 +105,6 @@ const useField = ({ words: initWords, maxTime }: FieldProps) => {
 		}
 	};
 
-	useEffect(() => {
-		if (completeCalled) {
-			setCompleteCalled(false);
-			onComplete();
-		}
-	}, [completeCalled, typedWord]);
-
 	const onComplete = () => {
 		document.getElementById('field_cursor')?.focus();
 
@@ -136,6 +128,41 @@ const useField = ({ words: initWords, maxTime }: FieldProps) => {
 		setTypedWord(typedWordDefault);
 	};
 
+	const resetSession = () => {
+		setFinishScreenSeen(false);
+		setStartedTyping(false);
+		setRemainingTime(maxTime);
+		setStats(statsDefault);
+		setCompleteCalled(false);
+	};
+
+	// Check if typed word is already correct
+	useEffect(() => {
+		if (completeCalled) {
+			setCompleteCalled(false);
+			onComplete();
+		}
+	}, [completeCalled, typedWord]);
+
+	// Live-update of initial words queue
+	useEffect(() => {
+		setOriginalWord(initWords[0]);
+		setActiveWord(initWords[0]);
+		setActiveWordRemovedPart('');
+		setTypedWord(typedWordDefault);
+		setFinishedWords([]);
+
+		setWordsQueue(initWords.slice(1));
+	}, [initWords]);
+
+	useEffect(() => {
+		if (isTimeOver) {
+			setFinishScreenSeen(true);
+		} else {
+			setFinishScreenSeen(false);
+		}
+	}, [isTimeOver]);
+
 	return {
 		stats,
 		startedTyping,
@@ -146,8 +173,11 @@ const useField = ({ words: initWords, maxTime }: FieldProps) => {
 		activeWordRemovedPart,
 		typedWord,
 		completeCalled,
+		isTimeOver,
+		isFinishScreenSeen,
 		onType,
 		onBackspace,
+		resetSession,
 		onComplete,
 	};
 };

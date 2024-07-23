@@ -9,9 +9,12 @@ interface Session {
 	activeWord: string;
 	activeWordRemovedPart: string;
 	typedWord: TypedWord;
+	isTimeOver: Boolean | null;
 	completeCalled: Boolean;
+	isFinishScreenSeen: Boolean;
 	finishedWords: OldWord[];
 	words: string[];
+	resetSession: () => void;
 	onComplete: () => void;
 	onType: (char: string) => void;
 	onBackspace: () => void;
