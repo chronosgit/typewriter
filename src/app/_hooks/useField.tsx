@@ -6,131 +6,146 @@ import TypedWord from '@/types/TypedWord';
 import useTime from './useTime';
 
 interface FieldProps {
-	words: string[];
-	maxTime: number;
+  words: string[];
+  maxTime: number;
 }
 
 const useField = ({ words: initWords, maxTime }: FieldProps) => {
-	const { startedTyping, startTyping, remainingTime } = useTime(maxTime);
+  const { startedTyping, startTyping, remainingTime } = useTime(maxTime);
 
-	const [stats, setStats] = useState({
-		wordsPerTime: 0,
-		charsPerTime: 0,
-		accuracy: 0,
-	});
+  const [stats, setStats] = useState({
+    wordsPerTime: 0,
+    charsPerTime: 0,
+    accuracy: 0,
+  });
 
-	const [originalWord, setOriginalWord] = useState<string>(initWords[0]);
-	const [activeWord, setActiveWord] = useState<string>(initWords[0]);
-	const [activeWordRemovedPart, setActiveWordRemovedPart] =
-		useState<string>('');
+  const [originalWord, setOriginalWord] = useState<string>(initWords[0]);
+  const [activeWord, setActiveWord] = useState<string>(initWords[0]);
+  const [activeWordRemovedPart, setActiveWordRemovedPart] = useState<string>('');
 
-	// 15 words, first word is future activeWord
-	const [wordsQueue, setWordsQueue] = useState(initWords.slice(1));
+  // 15 words, first word is future activeWord
+  const [wordsQueue, setWordsQueue] = useState(initWords.slice(1));
 
-	const [finishedWords, setFinishedWords] = useState<FinishedWord[]>([]);
+  const [finishedWords, setFinishedWords] = useState<FinishedWord[]>([]);
 
-	const typedWordDefault: TypedWord = { value: '', isCorrect: false };
-	const [typedWord, setTypedWord] = useState<TypedWord>(typedWordDefault);
+  const typedWordDefault: TypedWord = { value: '', isCorrect: false };
+  const [typedWord, setTypedWord] = useState<TypedWord>(typedWordDefault);
 
-	useEffect(() => {
-		setOriginalWord(initWords[0]);
-		setActiveWord(initWords[0]);
+  const [completeCalled, setCompleteCalled] = useState(false);
 
-		setWordsQueue(initWords.slice(1));
-	}, [initWords]);
+  useEffect(() => {
+    setOriginalWord(initWords[0]);
+    setActiveWord(initWords[0]);
 
-	const updateWordsQueue = () => {
-		setWordsQueue(p => p.slice(1));
-	};
+    setWordsQueue(initWords.slice(1));
+  }, [initWords]);
 
-	const onType = (char: string) => {
-		if (!startedTyping) {
-			return;
-		}
+  const updateWordsQueue = () => {
+    setWordsQueue(p => p.slice(1));
+  };
 
-		const newTypedWord = typedWord.value + char;
+  const onType = (char: string) => {
+    if (!startedTyping) {
+      return;
+    }
 
-		if (originalWord.startsWith(newTypedWord)) {
-			// Valid typing
-			setActiveWordRemovedPart(p => p + activeWord[0]); // TODO: investigate
-			setActiveWord(p => p.slice(1)); // TODO: investigate
+    const newTypedWord = typedWord.value + char;
 
-			setTypedWord({
-				value: newTypedWord,
-				isCorrect: true,
-			});
-		} else {
-			// Invalid
-			setTypedWord({
-				value: newTypedWord,
-				isCorrect: false,
-			});
-		}
-	};
+    if (originalWord.startsWith(newTypedWord)) {
+      // Valid typing
+      setActiveWordRemovedPart(p => p + (activeWord[0] || ''));
+      setActiveWord(p => p.slice(1));
 
-	const onBackspace = () => {
-		if (!startedTyping) {
-			return;
-		}
+      setTypedWord({
+        value: newTypedWord,
+        isCorrect: true,
+      });
 
-		const newTypedWord = typedWord.value.slice(0, typedWord.value.length - 1);
+      // If the word is completed
+      if (newTypedWord === originalWord) {
+        setCompleteCalled(true);
+      }
+    } else {
+      // Invalid
+      setTypedWord({
+        value: newTypedWord,
+        isCorrect: false,
+      });
+    }
+  };
 
-		if (originalWord.startsWith(newTypedWord)) {
-			// Valid word now
-			setActiveWord(p => activeWordRemovedPart[0] + p); // TODO: investigate
-			setActiveWordRemovedPart(p => p.slice(0, p.length - 1)); // TODO: investigate
+  const onBackspace = () => {
+    if (!startedTyping) {
+      return;
+    }
 
-			setTypedWord({
-				value: newTypedWord,
-				isCorrect: true,
-			});
-		} else {
-			// Invalid
-			setTypedWord({
-				value: newTypedWord,
-				isCorrect: false,
-			});
-		}
-	};
+    const wasCorrect = originalWord.startsWith(typedWord.value);
+    const newTypedWord = typedWord.value.slice(0, typedWord.value.length - 1);
 
-	const onComplete = () => {
-		if (!startedTyping) {
-			startTyping();
+    if (originalWord.startsWith(newTypedWord)) {
+      // Valid word now
+      if (wasCorrect) {
+        setActiveWord(p => (activeWordRemovedPart[activeWordRemovedPart.length - 1] || '') + p);
+        setActiveWordRemovedPart(p => p.slice(0, p.length - 1));
+      }
 
-			document.getElementById('field_cursor')?.focus();
-			return;
-		}
+      setTypedWord({
+        value: newTypedWord,
+        isCorrect: true,
+      });
+    } else {
+      // Invalid
+      setTypedWord({
+        value: newTypedWord,
+        isCorrect: false,
+      });
+    }
+  };
 
-		if (typedWord.value.length === 0) {
-			return;
-		}
+  useEffect(() => {
+    if (completeCalled) {
+      setCompleteCalled(false);
+      onComplete();
+    }
+  }, [completeCalled, typedWord]);
 
-		// Do we need to wait until queue gets updated?
-		setActiveWord(wordsQueue[0]);
-		setOriginalWord(wordsQueue[0]);
+  const onComplete = () => {
+    document.getElementById('field_cursor')?.focus();
 
-		updateWordsQueue();
+    if (!startedTyping) {
+      startTyping();
+      return;
+    }
 
-		setFinishedWords(p => {
-			return [...p, typedWord];
-		});
+    if (typedWord.value.length === 0) {
+      return;
+    }
 
-		setTypedWord(typedWordDefault);
-	};
+    setActiveWord(wordsQueue[0]);
+    setActiveWordRemovedPart('');
+    setOriginalWord(wordsQueue[0]);
 
-	return {
-		stats,
-		startedTyping,
-		remainingTime,
-		wordsQueue,
-		finishedWords,
-		activeWord,
-		activeWordRemovedPart,
-		typedWord,
-		onType,
-		onBackspace,
-		onComplete,
-	};
+    updateWordsQueue();
+
+    setFinishedWords(p => [...p, typedWord]);
+
+    setTypedWord(typedWordDefault);
+  };
+
+  return {
+    stats,
+    startedTyping,
+    remainingTime,
+    wordsQueue,
+    finishedWords,
+    activeWord,
+    activeWordRemovedPart,
+    typedWord,
+		completeCalled,
+    onType,
+    onBackspace,
+    onComplete,
+  };
 };
 
 export default useField;

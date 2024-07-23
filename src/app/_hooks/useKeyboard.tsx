@@ -11,6 +11,7 @@ interface Args {
 	startedTyping: Boolean;
 	activeWord: string;
 	activeWordRemovedPart: string;
+	completeCalled: Boolean;
 	typedWord: TypedWord;
 }
 
@@ -19,6 +20,7 @@ const useKeyboard = ({
 	onType,
 	onBackspace,
 	startedTyping,
+	completeCalled,
 	activeWord,
 	activeWordRemovedPart,
 	typedWord,
@@ -28,10 +30,12 @@ const useKeyboard = ({
 			const { key } = event;
 
 			if (key === 'Enter' || key === ' ') {
+				if(completeCalled) return;
+				
 				onComplete();
 			} else if (key === 'Backspace') {
 				onBackspace();
-			} else if (key.length === 1 && /^[a-zA-Z0-9]$/.test(key)) {
+			} else if (key.length === 1 && /^[a-zA-Z0-9"',.!?]$/.test(key)) {
 				onType(key);
 			}
 		};

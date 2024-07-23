@@ -22,6 +22,7 @@ const Field = () => {
 		words,
 		startedTyping,
 		onType,
+		completeCalled,
 		onBackspace,
 		onComplete,
 	} = sessionCtx!;
@@ -33,6 +34,7 @@ const Field = () => {
 		startedTyping,
 		activeWord,
 		activeWordRemovedPart,
+		completeCalled,
 		typedWord,
 	});
 

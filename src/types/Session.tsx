@@ -9,6 +9,7 @@ interface Session {
 	activeWord: string;
 	activeWordRemovedPart: string;
 	typedWord: TypedWord;
+	completeCalled: Boolean;
 	finishedWords: OldWord[];
 	words: string[];
 	onComplete: () => void;
