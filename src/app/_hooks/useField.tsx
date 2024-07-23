@@ -7,10 +7,9 @@ import useTime from './useTime';
 
 interface FieldProps {
 	words: string[];
-	maxTime: number;
 }
 
-const useField = ({ words: initWords, maxTime }: FieldProps) => {
+const useField = ({ words: initWords }: FieldProps) => {
 	const {
 		startedTyping,
 		startTyping,
@@ -18,7 +17,7 @@ const useField = ({ words: initWords, maxTime }: FieldProps) => {
 		isTimeOver,
 		setRemainingTime,
 		setStartedTyping,
-	} = useTime(maxTime);
+	} = useTime(60);
 	const [completeCalled, setCompleteCalled] = useState(false);
 	const [isFinishScreenSeen, setFinishScreenSeen] = useState(false);
 
@@ -28,6 +27,9 @@ const useField = ({ words: initWords, maxTime }: FieldProps) => {
 		accuracy: 0,
 	};
 	const [stats, setStats] = useState(statsDefault);
+	const [allTypedWordsNum, setAllTypedWordsNum] = useState(0);
+	const [correctTypedWordsNum, setCorrectTypedWordsNum] = useState(0);
+	const [allTypedCharsNum, setAllTypedCharsNum] = useState(0);
 
 	const [originalWord, setOriginalWord] = useState<string>(initWords[0]);
 	const [activeWord, setActiveWord] = useState<string>(initWords[0]);
@@ -48,6 +50,8 @@ const useField = ({ words: initWords, maxTime }: FieldProps) => {
 		if (!startedTyping) {
 			return;
 		}
+
+		setAllTypedCharsNum(p => p + 1);
 
 		const newTypedWord = typedWord.value + char;
 
@@ -117,12 +121,15 @@ const useField = ({ words: initWords, maxTime }: FieldProps) => {
 			return;
 		}
 
+		setAllTypedWordsNum(p => p + 1);
+
 		setActiveWord(wordsQueue[0]);
 		setActiveWordRemovedPart('');
 		setOriginalWord(wordsQueue[0]);
 
 		updateWordsQueue();
 
+		setCorrectTypedWordsNum(p => (typedWord.isCorrect ? p + 1 : p));
 		setFinishedWords(p => [...p, typedWord]);
 
 		setTypedWord(typedWordDefault);
@@ -131,9 +138,21 @@ const useField = ({ words: initWords, maxTime }: FieldProps) => {
 	const resetSession = () => {
 		setFinishScreenSeen(false);
 		setStartedTyping(false);
-		setRemainingTime(maxTime);
+		setRemainingTime(60);
 		setStats(statsDefault);
 		setCompleteCalled(false);
+	};
+
+	const calculateStatistics = () => {
+		const accuracy = Math.round(
+			(correctTypedWordsNum * 100) / allTypedWordsNum
+		);
+
+		setStats({
+			wordsPerTime: allTypedWordsNum,
+			charsPerTime: allTypedCharsNum,
+			accuracy,
+		});
 	};
 
 	// Check if typed word is already correct
@@ -158,6 +177,8 @@ const useField = ({ words: initWords, maxTime }: FieldProps) => {
 	useEffect(() => {
 		if (isTimeOver) {
 			setFinishScreenSeen(true);
+
+			calculateStatistics();
 		} else {
 			setFinishScreenSeen(false);
 		}

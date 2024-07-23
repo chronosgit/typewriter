@@ -31,7 +31,7 @@ const SessionContextProvider: FC<ProviderProps> = ({ children }) => {
 		onBackspace,
 		resetSession,
 		onComplete,
-	} = useField({ words, maxTime: 5 });
+	} = useField({ words });
 
 	useEffect(() => {
 		if (isTimeOver === false) {
